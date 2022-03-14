@@ -55,18 +55,18 @@ class TodoView:
     keywords = self.request.params.get('keywords', None)
     
     if keywords:
-      response = requests.get('http://backend/v1/todos?keywords={}'.format(keywords))
+      response = requests.get('http://backend:8000/v1/todos?keywords={}'.format(keywords))
       if response.status_code > 200:
         return dict(error=True)
     else:
-      response = requests.get('http://backend/v1/todos')
+      response = requests.get('http://backend:8000/v1/todos')
       if response.status_code > 200:
         return dict(error=True)
 
     todos_list = [json.loads(todo) for todo in response.json()] 
 
     if 'submit' in self.request.POST:
-      response = requests.post('http://backend/v1/todos', json={
+      response = requests.post('http://backend:8000/v1/todos', json={
         'title': self.request.POST.get('title')
       })
 

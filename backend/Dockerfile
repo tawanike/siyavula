@@ -17,6 +17,10 @@ RUN ./venv/bin/python3 -m pip install --upgrade pip
 
 RUN ./venv/bin/pip3 install -r requirements.txt
 
+RUN ./venv/bin/flask db migrate
+
+RUN ./venv/bin/flask db upgrade
+
 EXPOSE 5000
 
 ENTRYPOINT [ "./venv/bin/python3" ]
