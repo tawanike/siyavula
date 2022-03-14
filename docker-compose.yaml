@@ -1,0 +1,29 @@
+version: "3.9"
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8000:5000"
+    links:
+      - db
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    links:
+      - backend
+  db:
+    image: 'postgres:latest'
+    ports:
+      - "5432:5432"
+
+    environment:
+      POSTGRES_USER: siyavula
+      POSTGRES_PASSWORD: siyavula
+      POSTGRES_DB: siyavula
